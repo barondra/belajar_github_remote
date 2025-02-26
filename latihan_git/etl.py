@@ -6,3 +6,8 @@ def transform():
     
 def load():
     print("load data")
+    
+def elt():
+    extract()
+    load()
+    transform()
