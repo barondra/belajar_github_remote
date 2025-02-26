@@ -3,3 +3,6 @@ def extract():
     
 def transform():
     print("transform_data")
+    
+def load():
+    print("load data")
