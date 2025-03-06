@@ -1,3 +1,4 @@
+
 -- create dimensional model
 create table ftde_batch4.bharin_dim_products as
 select * from ftde_batch4.bharin_raw_products;
@@ -38,6 +39,7 @@ select * from bharin_dim_products bdp ;
 select * from bharin_dim_stores bds ;
 
 -- 1. how much total amount of sales per quarter per year
+create table ftde_batch4.bharin_dm_total_quarter_sales as 
 select date_part('year', to_date(dates.date, 'M/d/yyyy')) as date_year, dates.calendar_quarter, SUM(sales.sales_amount)
 from bharin_fact_sales as sales
 inner join ftde_batch4.bharin_dim_dates as dates
@@ -46,6 +48,7 @@ group by date_year, dates.calendar_quarter
 order by date_year desc, dates.calendar_quarter desc;
 
 -- 2. Give me top 3 royal customers
+create table ftde_batch4.bharin_dm_top3_royal_customers as 
 select SUM(sales.sales_amount), customer."name" 
 from bharin_fact_sales as sales
 inner join bharin_dim_customer as customer
@@ -55,6 +58,7 @@ order by SUM(sales.sales_amount) desc
 limit 3;
 
 -- 3. Top 3 best selling products based on total number of sales
+create table ftde_batch4.bharin_dm_top3_best_products as
 select COUNT(sales.product_id), products."name", SUM(sales.sales_amount)
 from bharin_fact_sales as sales
 inner join bharin_dim_products as products
@@ -64,6 +68,7 @@ order by COUNT(sales.product_id) desc
 limit 3;
 
 -- 4. Top 3 most wanted categories based on total number of sales
+create table ftde_batch4.bharin_dm_top3_best_categories as
 select COUNT(sales.product_id), products.categories, SUM(sales.sales_amount)
 from bharin_fact_sales as sales
 inner join bharin_dim_products as products
@@ -73,6 +78,7 @@ order by COUNT(sales.product_id) desc
 limit 3;
 
 -- 5. Top 3 most productive stores based on total number of sales
+create table ftde_batch4.bharin_dm_top3_productive_stores as
 select COUNT(sales.product_id), stores."name" , SUM(sales.sales_amount)
 from bharin_fact_sales as sales
 inner join bharin_dim_stores as stores
