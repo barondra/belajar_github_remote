@@ -1,0 +1,1 @@
+This subdirectory of repository is a submission for homework assignment by Digital Skola Bootcamp for Fast Track Data Engineering Course. It contains the jupyter notebook file to run MapReduce of Hadoop and its generated contents. Checkout the notebook.
