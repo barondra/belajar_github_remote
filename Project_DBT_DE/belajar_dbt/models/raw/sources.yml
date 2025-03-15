@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: global
+    database: penjualan
+    schema: global
+    tables:
+      - name: customer
+      - name: product
+      - name: time
+      - name: sales
